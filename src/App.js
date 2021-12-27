@@ -3,13 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-    getUserCity,
-    getUserLocation,
-    addUserCity,
-    addCity,
-    fetchUserCity,
-} from './store/citySlice';
+import { getUserLocation, addCity, fetchUserCity } from './store/citySlice';
 
 function App() {
     const dispatch = useDispatch();
@@ -17,17 +11,11 @@ function App() {
         navigator.geolocation.getCurrentPosition(
             function (position) {
                 const result = {
-                    latitude: position.coords.latitude,
-                    longitude: position.coords.longitude,
+                    latitude: parseFloat(position.coords.latitude).toFixed(2),
+                    longitude: parseFloat(position.coords.longitude).toFixed(2),
                 };
                 dispatch(getUserLocation(result));
-                // const latitude = position.coords.latitude;
-                // const longitude = position.coords.longitude;
-
                 dispatch(fetchUserCity(result));
-                // dispatch(getUserCity());
-                // dispatch(addUserCity());
-                // dispatch(addCity('Kiev'));
             },
             function (error) {
                 console.error(
@@ -41,7 +29,7 @@ function App() {
         <div className='App'>
             <header className='App-header'>
                 <img src={logo} className='App-logo' alt='logo' />
-                {city}
+                Your city - {city}
             </header>
         </div>
     );

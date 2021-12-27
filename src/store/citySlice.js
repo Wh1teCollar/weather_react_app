@@ -30,12 +30,6 @@ const citySlice = createSlice({
                 console.log(state.cityList);
             }
         },
-        addUserCity(state) {
-            if (!state.cityList.includes(state.userCity)) {
-                state.cityList.push(state.userCity);
-                console.log(state.cityList);
-            }
-        },
         getUserLocation(state, action) {
             state.coords = action.payload;
         },
@@ -53,7 +47,6 @@ const citySlice = createSlice({
     },
 });
 
-export const { addCity, getUserCity, getUserLocation, addUserCity } =
-    citySlice.actions;
+export const { addCity, getUserLocation } = citySlice.actions;
 
 export default citySlice.reducer;
